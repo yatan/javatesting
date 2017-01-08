@@ -5,6 +5,8 @@
  */
 package services;
 
+import kiosk.ActivationCard;
+
 /**
  * Local service for validating activation cards
  * @author Francisco Romero Batallé

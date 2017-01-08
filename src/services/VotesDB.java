@@ -5,6 +5,9 @@
  */
 package services;
 
+import data.Vote;
+import java.util.List;
+
 /**
  * Local service that registers votes.
  * @author Francisco Romero Batallé

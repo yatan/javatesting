@@ -5,6 +5,9 @@
  */
 package services;
 
+import data.MailAddress;
+import data.Signature;
+
 /**
  * External service for sending mails
  * @author Francisco Romero Batallé

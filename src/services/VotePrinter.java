@@ -5,6 +5,8 @@
  */
 package services;
 
+import data.Vote;
+
 /**
  * This service prints physically the vote to allow checking.
  * @author Francisco Romero Batallé
