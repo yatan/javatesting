@@ -29,6 +29,7 @@ public class VotingMachine {
     //Variables de la VotingMachine
     private boolean active = false;
     private ActivationCard activationCard;
+    private Vote voteVoted;
     
     public VotingMachine() { 
         //???????
@@ -64,10 +65,22 @@ public class VotingMachine {
     }
     
     public void vote(Vote vote) throws IllegalStateException { 
-        //???
+        //Si pot votar, endavant
+        if(canVote())
+        {
+            votesdb.registerVote(vote);
+            votePrint.print(vote);
+            //Guardem el vot, per a firmarlo en el mail.
+            voteVoted = vote;
+            val.deactivate(activationCard);
+        }else
+            throw new IllegalStateException("Can not vote");
     }
     
     public void sendReceipt(MailAddress address) throws IllegalStateException { 
-        //???
+        //Si pot votar, i ja ha votat, s'envia mail amb la firma
+        if(!canVote()) throw new IllegalStateException("Can not vote");
+        if(voteVoted == null) throw new IllegalStateException("Not yet voted");
+        mail.send(address, sign.sign(voteVoted));
     }
 }
