@@ -28,6 +28,7 @@ public class VotingMachine {
     
     //Variables de la VotingMachine
     private boolean active = false;
+    private ActivationCard activationCard;
     
     public VotingMachine() { 
         //???????
@@ -50,11 +51,16 @@ public class VotingMachine {
     }
 
     public void activateEmission(ActivationCard card) throws IllegalStateException {
-        val.validate(card);
+        //Si la maquina ja està activa, llençar excepció
+        if(active) throw new IllegalStateException("Machine already active");
+        if (val.validate(card)){
+            activationCard = card;
+            active = true;
+        }
     }
     
     public boolean canVote() {
-        //???
+        return active;        
     }
     
     public void vote(Vote vote) throws IllegalStateException { 
