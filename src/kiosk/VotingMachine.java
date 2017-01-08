@@ -19,22 +19,38 @@ import services.VotesDB;
  */
 public class VotingMachine {
     
+    //Serveis externs
+    ValidationService val;
     MailerService mail;
     SignatureService sign;
-    ValidationService val;
     VotePrinter votePrint;
     VotesDB votesdb;
+    
+    //Variables de la VotingMachine
+    private boolean active = false;
     
     public VotingMachine() { 
         //???????
     }
     
     public void setValidationService(ValidationService validationService) {
-    //???
+        val = validationService;
     }
-    //... // pels altres serveis
+    public void setMailerService(MailerService mailerService){
+        mail = mailerService;
+    }
+    public void setSignatureService(SignatureService signService){
+        sign = signService;
+    }
+    public void setVotePrinter(VotePrinter votePrinter){
+        votePrint = votePrinter;
+    }
+    public void setVotesDB(VotesDB votesDB){
+        votesdb = votesDB;
+    }
+
     public void activateEmission(ActivationCard card) throws IllegalStateException {
-        //???
+        val.validate(card);
     }
     
     public boolean canVote() {
