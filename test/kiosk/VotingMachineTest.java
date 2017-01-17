@@ -6,11 +6,10 @@
 package kiosk;
 
 import data.MailAddress;
+import data.Signature;
 import data.Vote;
-import org.junit.After;
-import org.junit.AfterClass;
+import java.util.List;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import services.MailerService;
@@ -25,24 +24,71 @@ import services.VotesDB;
  */
 public class VotingMachineTest {
     
+
+    MailerService mail;
+    SignatureService sign;
+    ValidationService val;
+    VotePrinter votePrint;
+    VotesDB voteDB;
+    
+    private class MailerServiceDouble implements MailerService {
+        @Override
+        public void send(MailAddress address, Signature signature) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+    
+    private class SignatureServiceDouble implements SignatureService {
+        @Override
+        public Signature sign(Vote vote) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } 
+    }
+    
+    private class ValidationServiceDouble implements ValidationService {
+
+        @Override
+        public boolean validate(ActivationCard card) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void deactivate(ActivationCard card) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    private class VotePrinterDouble implements VotePrinter {
+
+        @Override
+        public void print(Vote vote) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    private class VoteDBDouble implements VotesDB {
+
+        @Override
+        public void registerVote(Vote vote) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public List<Vote> getVotes() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+
     public VotingMachineTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+        
     @Before
     public void setUp() {
     }
     
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of setValidationService method, of class VotingMachine.
