@@ -8,6 +8,7 @@ package kiosk;
 import data.MailAddress;
 import data.Signature;
 import data.Vote;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class VotingMachineTest {
     private class SignatureServiceDouble implements SignatureService {
         @Override
         public Signature sign(Vote vote) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return new Signature(vote.getOption().getBytes());
         } 
     }
     
@@ -69,17 +70,17 @@ public class VotingMachineTest {
     }
     
     private class VoteDBDouble implements VotesDB {
-
+        List<Vote> votes = new ArrayList();
+        
         @Override
         public void registerVote(Vote vote) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            votes.add(vote);
         }
 
         @Override
         public List<Vote> getVotes() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return votes;
         }
-        
     }
 
     public VotingMachineTest() {
@@ -87,6 +88,12 @@ public class VotingMachineTest {
         
     @Before
     public void setUp() {
+        //Asignar recursos externs a double
+        mail = new MailerServiceDouble();
+        sign = new SignatureServiceDouble();
+        val = new ValidationServiceDouble();
+        voteDB = new VoteDBDouble();
+        votePrint = new VotePrinterDouble();
     }
     
 
