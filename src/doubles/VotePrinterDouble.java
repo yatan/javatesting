@@ -16,7 +16,8 @@ public class VotePrinterDouble implements VotePrinter {
 
     @Override
     public void print(Vote vote) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Simulació impresió comprovant vot.
+        System.out.println("Imprimiendo voto: " + vote.toString());
     }
     
 }

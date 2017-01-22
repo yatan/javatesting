@@ -6,6 +6,7 @@
 package doubles;
 
 import data.Vote;
+import java.util.ArrayList;
 import java.util.List;
 import services.VotesDB;
 
@@ -14,15 +15,16 @@ import services.VotesDB;
  * @author Francisco Romero Batallé
  */
 public class VoteDBDouble implements VotesDB{
-
+    private List<Vote> llistatVots = new ArrayList<>();
+    
     @Override
     public void registerVote(Vote vote) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        llistatVots.add(vote);
     }
 
     @Override
     public List<Vote> getVotes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return llistatVots;
     }
     
 }

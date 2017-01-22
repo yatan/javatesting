@@ -17,7 +17,8 @@ public class MailerServiceDouble implements MailerService {
 
     @Override
     public void send(MailAddress address, Signature signature) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Simulació enviament correu amb la firma adjunta.
+        System.out.println("Sending signature: "+signature.getSignature().toString()+" to: "+address.getAddress());
     }
     
 }

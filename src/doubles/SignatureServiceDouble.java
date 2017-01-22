@@ -17,7 +17,7 @@ public class SignatureServiceDouble implements SignatureService{
 
     @Override
     public Signature sign(Vote vote) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Signature(vote.getOption().getBytes());
     }
     
 }

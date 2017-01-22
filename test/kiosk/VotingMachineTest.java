@@ -163,11 +163,9 @@ public class VotingMachineTest {
     @Test
     public void testSendReceipt() {
         System.out.println("sendReceipt");
-        MailAddress address = null;
+        MailAddress address = new MailAddress("AnyMail");
         VotingMachine instance = new VotingMachine();
         instance.sendReceipt(address);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

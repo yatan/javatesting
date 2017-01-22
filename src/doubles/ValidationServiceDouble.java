@@ -16,12 +16,12 @@ public class ValidationServiceDouble implements ValidationService{
 
     @Override
     public boolean validate(ActivationCard card) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return !card.isActive();
     }
 
     @Override
     public void deactivate(ActivationCard card) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        card.erase();
     }
     
 }
