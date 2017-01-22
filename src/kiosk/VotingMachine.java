@@ -32,7 +32,7 @@ public class VotingMachine {
     private Vote voteVoted;
     
     public VotingMachine() { 
-        //???????
+        activationCard = null;
     }
     
     public void setValidationService(ValidationService validationService) {
@@ -72,6 +72,7 @@ public class VotingMachine {
             votePrint.print(vote);
             //Guardem el vot, per a firmarlo en el mail.
             voteVoted = vote;
+            active = false;
             val.deactivate(activationCard);
         }else
             throw new IllegalStateException("Can not vote");
@@ -82,5 +83,9 @@ public class VotingMachine {
         if(!canVote()) throw new IllegalStateException("Can not vote");
         if(voteVoted == null) throw new IllegalStateException("Not yet voted");
         mail.send(address, sign.sign(voteVoted));
+    }
+    
+    public ActivationCard getActivationCard() {
+        return activationCard;
     }
 }

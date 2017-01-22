@@ -16,7 +16,7 @@ public class ValidationServiceDouble implements ValidationService{
 
     @Override
     public boolean validate(ActivationCard card) {
-        return !card.isActive();
+        return !"".equals(card.getCode());
     }
 
     @Override

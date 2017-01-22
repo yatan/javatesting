@@ -52,120 +52,80 @@ public class VotingMachineTest {
     }
     
 
+
     /**
-     * Test of setValidationService method, of class VotingMachine.
+     * Test canVote després de validar tarjeta
      */
     @Test
-    public void testSetValidationService() {
-        System.out.println("setValidationService");
-        ValidationService validationService = null;
+    public void testValidarTargeta() {
+        ActivationCard tarjeta = new ActivationCard("AnyCode");
         VotingMachine instance = new VotingMachine();
-        instance.setValidationService(validationService);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setValidationService(val);
+        instance.setMailerService(mail);
+        instance.setSignatureService(sign);
+        instance.setVotePrinter(votePrint);
+        instance.setVotesDB(voteDB);
+        
+        //Validem tarjeta
+        val.validate(tarjeta);
+        //Activem voting machine amb la tarjeta
+        instance.activateEmission(tarjeta);
+        
+        assertTrue("No podem votar degut a la tarjeta", instance.canVote());
     }
 
     /**
-     * Test of setMailerService method, of class VotingMachine.
+     * Test canVote després de validar tarjeta
      */
     @Test
-    public void testSetMailerService() {
-        System.out.println("setMailerService");
-        MailerService mailerService = null;
+    public void testVotar() {
+        ActivationCard tarjeta = new ActivationCard("AnyCode");
+        Vote vot = new Vote("AnyOption");
         VotingMachine instance = new VotingMachine();
-        instance.setMailerService(mailerService);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        instance.setValidationService(val);
+        instance.setMailerService(mail);
+        instance.setSignatureService(sign);
+        instance.setVotePrinter(votePrint);
+        instance.setVotesDB(voteDB);
+        
+        //Validem tarjeta
+        val.validate(tarjeta);
+        //Activem voting machine amb la tarjeta
+        instance.activateEmission(tarjeta);
+        
+        assertTrue("No podem votar degut a la tarjeta", instance.canVote());
+        
+        instance.vote(vot);
+        assertTrue("Vot no registrat", voteDB.getVotes().size()==1);
+    }    
 
     /**
-     * Test of setSignatureService method, of class VotingMachine.
+     * Test canVote després de validar tarjeta
      */
     @Test
-    public void testSetSignatureService() {
-        System.out.println("setSignatureService");
-        SignatureService signService = null;
+    public void testDesactivar() {
+        ActivationCard tarjeta = new ActivationCard("AnyCode");
+        Vote vot = new Vote("AnyOption");
         VotingMachine instance = new VotingMachine();
-        instance.setSignatureService(signService);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setVotePrinter method, of class VotingMachine.
-     */
-    @Test
-    public void testSetVotePrinter() {
-        System.out.println("setVotePrinter");
-        VotePrinter votePrinter = null;
-        VotingMachine instance = new VotingMachine();
-        instance.setVotePrinter(votePrinter);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setVotesDB method, of class VotingMachine.
-     */
-    @Test
-    public void testSetVotesDB() {
-        System.out.println("setVotesDB");
-        VotesDB votesDB = null;
-        VotingMachine instance = new VotingMachine();
-        instance.setVotesDB(votesDB);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of activateEmission method, of class VotingMachine.
-     */
-    @Test
-    public void testActivateEmission() {
-        System.out.println("activateEmission");
-        ActivationCard card = null;
-        VotingMachine instance = new VotingMachine();
-        instance.activateEmission(card);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of canVote method, of class VotingMachine.
-     */
-    @Test
-    public void testCanVote() {
-        System.out.println("canVote");
-        VotingMachine instance = new VotingMachine();
-        boolean expResult = false;
-        boolean result = instance.canVote();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of vote method, of class VotingMachine.
-     */
-    @Test
-    public void testVote() {
-        System.out.println("vote");
-        Vote vote = null;
-        VotingMachine instance = new VotingMachine();
-        instance.vote(vote);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of sendReceipt method, of class VotingMachine.
-     */
-    @Test
-    public void testSendReceipt() {
-        System.out.println("sendReceipt");
-        MailAddress address = new MailAddress("AnyMail");
-        VotingMachine instance = new VotingMachine();
-        instance.sendReceipt(address);
-    }
+        instance.setValidationService(val);
+        instance.setMailerService(mail);
+        instance.setSignatureService(sign);
+        instance.setVotePrinter(votePrint);
+        instance.setVotesDB(voteDB);
+        
+        //Validem tarjeta
+        val.validate(tarjeta);
+        //Activem voting machine amb la tarjeta
+        instance.activateEmission(tarjeta);
+        
+        assertTrue("No podem votar degut a la tarjeta", instance.canVote());
+        
+        instance.vote(vot);
+        assertTrue("Vot no registrat", voteDB.getVotes().size()==1);
+        
+        //Verifiquem que la tarjeta es invalida i no pot deixar tornar a votar
+        val.validate(tarjeta);
+        assertFalse("La maquina tindria que no deixar votar", instance.canVote());
+    }   
     
 }
